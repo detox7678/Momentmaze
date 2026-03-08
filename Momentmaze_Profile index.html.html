@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Momentmaze — Company Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --coral:#FF6B5B;
+  --purple:#9B7FD4;
+  --green:#5FD068;
+  --yellow:#FFE566;
+  --teal:#4ECDC4;
+  --pink:#FF9ECD;
+  --white:#FFFFFF;
+  --ink:#2D2D2D;
+  --light-purple:#C4B5F0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;color:var(--ink);overflow-x:hidden;background:var(--yellow);}
+.doodles{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.doodle{position:absolute;font-size:1.4rem;opacity:.55;animation:wobble 3s ease-in-out infinite;}
+@keyframes wobble{0%,100%{transform:rotate(-8deg) scale(1);}50%{transform:rotate(8deg) scale(1.12);}}
+.wave-divider{display:block;width:100%;overflow:hidden;line-height:0;}
+.wave-divider svg{display:block;width:100%;}
+nav{background:var(--coral);padding:1rem 3rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:3px solid var(--ink);}
+.nav-logo{font-family:'Fredoka One',cursive;font-size:1.8rem;color:var(--white);letter-spacing:.02em;text-shadow:3px 3px 0 rgba(0,0,0,.15);}
+.nav-logo span{color:var(--yellow);}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-family:'Nunito',sans-serif;font-weight:800;font-size:.9rem;color:var(--white);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--yellow);}
+.hero{background:var(--coral);padding:5rem 3rem 0;position:relative;overflow:hidden;min-height:85vh;display:flex;align-items:center;justify-content:center;text-align:center;flex-direction:column;}
+.hero-blob-l{position:absolute;bottom:0;left:-60px;width:340px;height:300px;background:var(--purple);border-radius:60% 40% 30% 70%/60% 30% 70% 40%;opacity:.9;}
+.hero-blob-r{position:absolute;top:30px;right:-40px;width:220px;height:220px;background:var(--green);border-radius:30% 70% 70% 30%/30% 52% 48% 70%;opacity:.7;}
+.hero-blob-ry{position:absolute;top:-20px;right:120px;width:100px;height:100px;background:var(--yellow);border-radius:50%;opacity:.8;}
+.squiggle-zone{position:absolute;top:0;right:0;width:180px;height:180px;background:var(--green);border-radius:50%;opacity:.18;background-image:radial-gradient(circle,var(--ink) 1.5px,transparent 1.5px);background-size:10px 10px;}
+.squiggle-zone2{position:absolute;bottom:40px;left:40px;width:120px;height:120px;background:var(--yellow);border-radius:50%;opacity:.3;background-image:radial-gradient(circle,var(--purple) 1.5px,transparent 1.5px);background-size:8px 8px;}
+.hero-eyebrow{font-family:'Fredoka One',cursive;font-size:1rem;color:var(--yellow);letter-spacing:.15em;position:relative;z-index:2;margin-bottom:.5rem;text-shadow:2px 2px 0 rgba(0,0,0,.1);}
+.hero-h1{font-family:'Fredoka One',cursive;font-size:clamp(4.5rem,11vw,9rem);color:var(--white);line-height:.9;position:relative;z-index:2;text-shadow:5px 5px 0 rgba(0,0,0,.1);letter-spacing:-.01em;}
+.hero-h1 .outline{-webkit-text-stroke:4px var(--white);color:transparent;}
+.hero-h1 .yellow{color:var(--yellow);}
+.hero-speech{display:inline-block;background:var(--green);color:var(--white);font-family:'Fredoka One',cursive;font-size:1.5rem;padding:.6rem 2rem .6rem 1.5rem;border-radius:50px;position:relative;z-index:2;margin-top:1.5rem;box-shadow:4px 4px 0 rgba(0,0,0,.15);border:3px solid rgba(255,255,255,.3);}
+.hero-speech::after{content:'';position:absolute;bottom:-18px;left:30px;border-width:18px 12px 0;border-style:solid;border-color:var(--green) transparent transparent;}
+.hero-tagline{font-family:'Nunito',sans-serif;font-weight:800;font-size:1.1rem;color:rgba(255,255,255,.85);margin-top:2.5rem;position:relative;z-index:2;max-width:440px;line-height:1.5;}
+.hero-cta-row{display:flex;gap:1.2rem;margin-top:2rem;flex-wrap:wrap;justify-content:center;position:relative;z-index:2;margin-bottom:4rem;}
+.btn-white{background:var(--white);color:var(--coral);font-family:'Fredoka One',cursive;font-size:1.1rem;padding:.8rem 2.2rem;border:none;border-radius:50px;text-decoration:none;box-shadow:4px 4px 0 rgba(0,0,0,.12);transition:transform .15s,box-shadow .15s;display:inline-block;cursor:pointer;}
+.btn-white:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 rgba(0,0,0,.15);}
+.btn-outline{background:transparent;color:var(--white);font-family:'Fredoka One',cursive;font-size:1.1rem;padding:.8rem 2.2rem;border:3px solid rgba(255,255,255,.6);border-radius:50px;text-decoration:none;transition:all .2s;display:inline-block;cursor:pointer;}
+.btn-outline:hover{background:rgba(255,255,255,.15);}
+.float-deco{position:absolute;font-size:2.5rem;z-index:3;animation:floaty 3s ease-in-out infinite;}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-5deg);}50%{transform:translateY(-12px) rotate(5deg);}}
+.wave-coral-to-purple svg path{fill:var(--light-purple);}
+.about{background:var(--light-purple);padding:4rem 3rem 0;position:relative;overflow:hidden;}
+.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;max-width:960px;margin:0 auto;padding-bottom:3rem;}
+.about-mascot{font-size:8rem;text-align:center;animation:floaty 2.5s ease-in-out infinite;filter:drop-shadow(4px 8px 10px rgba(0,0,0,.15));}
+.section-title{font-family:'Fredoka One',cursive;font-size:3rem;color:var(--coral);margin-bottom:1rem;text-shadow:3px 3px 0 rgba(0,0,0,.06);}
+.about-text{font-size:1rem;font-weight:600;color:var(--ink);line-height:1.75;}
+.fact-pills{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.5rem;}
+.pill{background:var(--white);color:var(--ink);font-family:'Nunito',sans-serif;font-weight:800;font-size:.82rem;padding:.45rem 1.1rem;border-radius:50px;border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);}
+.wave-purple-to-green svg path{fill:var(--green);}
+.services{background:var(--green);padding:4rem 3rem 0;position:relative;overflow:hidden;}
+.services-inner{max-width:960px;margin:0 auto;padding-bottom:4rem;}
+.services .section-title{color:var(--purple);text-align:center;}
+.services-sub{text-align:center;font-weight:700;color:rgba(45,45,45,.6);margin-bottom:3rem;font-size:1rem;}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.sc{background:var(--white);border-radius:20px;padding:2rem 1.5rem;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);transition:transform .2s,box-shadow .2s;cursor:default;position:relative;overflow:hidden;}
+.sc:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink);}
+.sc-emoji{font-size:2.2rem;margin-bottom:.8rem;display:block;}
+.sc-num{position:absolute;top:1rem;right:1.2rem;font-family:'Fredoka One',cursive;font-size:2rem;color:rgba(0,0,0,.06);line-height:1;}
+.sc-title{font-family:'Fredoka One',cursive;font-size:1.1rem;color:var(--purple);margin-bottom:.5rem;line-height:1.3;}
+.sc-desc{font-size:.83rem;font-weight:600;color:#555;line-height:1.65;}
+.sc-tag{display:inline-block;margin-top:1rem;background:var(--yellow);color:var(--ink);font-family:'Nunito',sans-serif;font-weight:800;font-size:.7rem;letter-spacing:.05em;padding:.25rem .8rem;border-radius:50px;border:2px solid var(--ink);}
+.wave-green-to-yellow svg path{fill:var(--yellow);}
+.why{background:var(--yellow);padding:4rem 3rem 0;position:relative;overflow:hidden;}
+.why-inner{max-width:960px;margin:0 auto;padding-bottom:4rem;}
+.why .section-title{color:var(--purple);text-align:center;}
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:2.5rem;}
+.wc{background:var(--white);border-radius:20px;padding:1.8rem;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);display:flex;gap:1.2rem;align-items:flex-start;transition:transform .2s,box-shadow .2s;}
+.wc:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--ink);}
+.wc-icon-box{background:var(--coral);border-radius:12px;border:2px solid var(--ink);width:50px;height:50px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
+.wc-title{font-family:'Fredoka One',cursive;font-size:1.1rem;color:var(--purple);margin-bottom:.3rem;}
+.wc-desc{font-size:.85rem;font-weight:600;color:#555;line-height:1.6;}
+.wave-yellow-to-coral svg path{fill:var(--coral);}
+.contact{background:var(--coral);padding:4rem 3rem;position:relative;overflow:hidden;}
+.contact::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.18) 2px,transparent 2px);background-size:22px 22px;pointer-events:none;}
+.contact-inner{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;position:relative;z-index:1;}
+.contact .section-title{color:var(--white);text-align:left;margin-bottom:.5rem;}
+.contact-sub{font-weight:700;color:rgba(255,255,255,.75);font-size:.95rem;line-height:1.6;margin-bottom:2rem;}
+.clink{display:flex;align-items:center;gap:1rem;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.4);border-radius:14px;padding:.9rem 1.2rem;text-decoration:none;color:var(--white);margin-bottom:.8rem;transition:background .2s;backdrop-filter:blur(4px);}
+.clink:hover{background:rgba(255,255,255,.25);}
+.clink-icon{font-size:1.3rem;width:32px;text-align:center;}
+.clink-lbl{font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.6);}
+.clink-val{font-weight:800;font-size:.92rem;margin-top:.1rem;}
+.form-card{background:var(--white);border-radius:24px;border:3px solid var(--ink);box-shadow:8px 8px 0 var(--ink);padding:2.5rem;}
+.form-card-title{font-family:'Fredoka One',cursive;font-size:1.6rem;color:var(--purple);margin-bottom:.3rem;}
+.form-card-sub{font-size:.82rem;font-weight:600;color:#888;margin-bottom:1.5rem;}
+.fg{margin-bottom:1rem;}
+.fg label{display:block;font-weight:800;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:#888;margin-bottom:.35rem;}
+.fg input,.fg textarea,.fg select{width:100%;background:var(--yellow);border:2px solid var(--ink);border-radius:10px;color:var(--ink);padding:.75rem 1rem;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:600;outline:none;transition:border-color .2s,box-shadow .2s;appearance:none;}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--purple);box-shadow:3px 3px 0 var(--purple);}
+.fg textarea{resize:vertical;min-height:85px;}
+.fg select option{background:var(--white);}
+.fbtn{width:100%;background:var(--purple);color:var(--white);font-family:'Fredoka One',cursive;font-size:1.2rem;padding:.9rem;border:3px solid var(--ink);border-radius:14px;box-shadow:4px 4px 0 var(--ink);cursor:pointer;margin-top:.3rem;transition:transform .15s,box-shadow .15s;}
+.fbtn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink);}
+.fsuccess{display:none;text-align:center;padding:2.5rem 1rem;font-family:'Fredoka One',cursive;font-size:1.5rem;color:var(--purple);}
+.fsuccess span{display:block;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:700;color:#888;margin-top:.5rem;}
+footer{background:var(--purple);padding:1.8rem 3rem;display:flex;align-items:center;justify-content:space-between;border-top:3px solid var(--ink);}
+.flogo{font-family:'Fredoka One',cursive;font-size:1.6rem;color:var(--white);}
+.flogo span{color:var(--yellow);}
+.fcopy{font-size:.8rem;font-weight:700;color:rgba(255,255,255,.55);text-align:right;line-height:1.7;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.on{opacity:1;transform:none;}
+.h1{opacity:0;animation:fu .6s forwards .1s;}
+.h2{opacity:0;animation:fu .6s forwards .25s;}
+.h3{opacity:0;animation:fu .6s forwards .4s;}
+.h4{opacity:0;animation:fu .6s forwards .55s;}
+.h5{opacity:0;animation:fu .6s forwards .7s;}
+.h6{opacity:0;animation:fu .6s forwards .85s;}
+@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@media(max-width:860px){
+  .about-inner,.contact-inner{grid-template-columns:1fr;}
+  .about-mascot{font-size:5rem;}
+  .svc-grid{grid-template-columns:1fr 1fr;}
+  .why-grid{grid-template-columns:1fr;}
+  nav{padding:.8rem 1.5rem;}
+  .nav-links{gap:1.2rem;}
+  footer{flex-direction:column;gap:.5rem;text-align:center;}
+  .fcopy{text-align:center;}
+  .hero{padding:4rem 1.5rem 0;}
+}
+@media(max-width:560px){
+  .svc-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Moment<span>maze</span> 🎯</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-blob-l"></div>
+  <div class="hero-blob-r"></div>
+  <div class="hero-blob-ry"></div>
+  <div class="squiggle-zone"></div>
+  <div class="squiggle-zone2"></div>
+  <div class="float-deco" style="top:12%;left:8%;animation-delay:0s;">💜</div>
+  <div class="float-deco" style="top:18%;right:22%;animation-delay:.5s;font-size:2rem;">✨</div>
+  <div class="float-deco" style="top:55%;right:10%;animation-delay:1s;font-size:1.8rem;">🦴</div>
+  <div class="float-deco" style="bottom:20%;left:18%;animation-delay:.7s;font-size:2rem;">🐾</div>
+  <div class="float-deco" style="top:8%;right:12%;animation-delay:1.3s;font-size:1.6rem;">⭐</div>
+  <div class="hero-eyebrow h1">✦ Delhi, India · Digital Agency · 2025 ✦</div>
+  <h1 class="hero-h1 h2">
+    <span class="yellow">Moment</span><br>
+    <span class="outline">maze</span>
+  </h1>
+  <div class="hero-speech h3">Results you can measure! 📊</div>
+  <p class="hero-tagline h4">"Quality you can trust — landing pages, ads & websites that actually convert visitors into customers."</p>
+  <div class="hero-cta-row h5">
+    <a href="#contact" class="btn-white">Work With Us 🚀</a>
+    <a href="#services" class="btn-outline">Our Services ↓</a>
+  </div>
+</section>
+
+<div class="wave-divider wave-coral-to-purple">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z"/>
+  </svg>
+</div>
+
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="reveal">
+      <h2 class="section-title">About Us 👋</h2>
+      <p class="about-text">Momentmaze is a Delhi-based digital agency that turns your online presence into a <strong>revenue machine</strong>. We combine sales psychology, sharp design, and technical precision to build pages and campaigns that don't just look good — they <strong>perform</strong>.</p>
+      <p class="about-text" style="margin-top:.8rem;">Every pixel, every word, every element placed with one purpose: getting your visitor to <strong>act</strong>.</p>
+      <div class="fact-pills">
+        <div class="pill">📍 Delhi, India</div>
+        <div class="pill">✉️ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0a626f6666654a6765676f647e676b706f246364">[email&#160;protected]</a></div>
+        <div class="pill">📱 +91 92171 47794</div>
+        <div class="pill">📸 @webs.moment</div>
+        <div class="pill">🎯 Conversion-First</div>
+        <div class="pill">👑 Always Overdeliver</div>
+      </div>
+    </div>
+    <div class="about-mascot reveal">🎯</div>
+  </div>
+</section>
+
+<div class="wave-divider wave-purple-to-green">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C360,70 720,0 1080,50 C1200,65 1340,20 1440,30 L1440,80 L0,80 Z"/>
+  </svg>
+</div>
+
+<section class="services" id="services">
+  <div class="services-inner">
+    <h2 class="section-title reveal">Our Services 💼</h2>
+    <p class="services-sub reveal">Everything your business needs to grow online</p>
+    <div class="svc-grid">
+      <div class="sc reveal">
+        <div class="sc-num">01</div>
+        <span class="sc-emoji">🚀</span>
+        <div class="sc-title">High-Converting Landing Pages</div>
+        <div class="sc-desc">Designed with sales psychology to turn visitors into customers. Every section engineered for action.</div>
+        <div class="sc-tag">Most Popular ⭐</div>
+      </div>
+      <div class="sc reveal">
+        <div class="sc-num">02</div>
+        <span class="sc-emoji">✍️</span>
+        <div class="sc-title">Hero Section & CTA Copywriting</div>
+        <div class="sc-desc">Persuasive, action-driven words that make people click. We write the copy that closes deals.</div>
+        <div class="sc-tag">High Impact 💥</div>
+      </div>
+      <div class="sc reveal">
+        <div class="sc-num">03</div>
+        <span class="sc-emoji">🎨</span>
+        <div class="sc-title">Sales-Optimized Themes</div>
+        <div class="sc-desc">Visuals and layouts built specifically to maximize conversions. Beautiful and ruthlessly effective.</div>
+        <div class="sc-tag">Conversion Focused 🎯</div>
+      </div>
+      <div class="sc reveal">
+        <div class="sc-num">04</div>
+        <span class="sc-emoji">📊</span>
+        <div class="sc-title">Google Sheets Form Systems</div>
+        <div class="sc-desc">Every lead, inquiry, and submission automatically recorded and organized. Zero leads lost.</div>
+        <div class="sc-tag">Auto-Organized ✅</div>
+      </div>
+      <div class="sc reveal">
+        <div class="sc-num">05</div>
+        <span class="sc-emoji">📱</span>
+        <div class="sc-title">Paid Ads Management</div>
+        <div class="sc-desc">Targeted ads that bring the right people to your pages. Every rupee spent where it counts.</div>
+        <div class="sc-tag">ROI Driven 💰</div>
+      </div>
+      <div class="sc reveal">
+        <div class="sc-num">06</div>
+        <span class="sc-emoji">🌐</span>
+        <div class="sc-title">Interactive Business Websites</div>
+        <div class="sc-desc">Beautiful, modern sites built to grow your brand online. Designed to impress and convert.</div>
+        <div class="sc-tag">Modern & Fast ⚡</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wave-divider wave-green-to-yellow">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,50 C180,10 400,70 720,30 C1000,0 1220,60 1440,20 L1440,80 L0,80 Z"/>
+  </svg>
+</div>
+
+<section class="why" id="why">
+  <div class="why-inner">
+    <h2 class="section-title reveal">Why Momentmaze? 🏆</h2>
+    <div class="why-grid">
+      <div class="wc reveal">
+        <div class="wc-icon-box">🎯</div>
+        <div><div class="wc-title">Conversion-First Design</div><div class="wc-desc">Every decision driven by one goal — getting your visitors to take action and become paying customers.</div></div>
+      </div>
+      <div class="wc reveal">
+        <div class="wc-icon-box">⚡</div>
+        <div><div class="wc-title">Super Fast Delivery</div><div class="wc-desc">We move fast without cutting corners. Deadlines are commitments, not suggestions.</div></div>
+      </div>
+      <div class="wc reveal">
+        <div class="wc-icon-box">👑</div>
+        <div><div class="wc-title">Overdelivered Value</div><div class="wc-desc">Clients consistently receive more than they paid for. It's our operating standard, every single time.</div></div>
+      </div>
+      <div class="wc reveal">
+        <div class="wc-icon-box">📈</div>
+        <div><div class="wc-title">Results & Data</div><div class="wc-desc">We track, measure, and report so you always know exactly what your investment is producing.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wave-divider wave-yellow-to-coral">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,30 C300,80 600,0 900,50 C1100,80 1300,10 1440,40 L1440,80 L0,80 Z"/>
+  </svg>
+</div>
+
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <h2 class="section-title">Let's Talk! 💬</h2>
+      <p class="contact-sub">Ready to grow your business? Reach out on any channel — we respond fast!</p>
+      <a class="clink" href="https://wa.me/919217147794" target="_blank">
+        <div class="clink-icon">💬</div>
+        <div><div class="clink-lbl">WhatsApp</div><div class="clink-val">+91 92171 47794</div></div>
+      </a>
+      <a class="clink" href="/cdn-cgi/l/email-protection#93fbf6fffffcd3fefcfef6fde7fef2e9f6bdfafd">
+        <div class="clink-icon">✉️</div>
+        <div><div class="clink-lbl">Email</div><div class="clink-val"><span class="__cf_email__" data-cfemail="bdd5d8d1d1d2fdd0d2d0d8d3c9d0dcc7d893d4d3">[email&#160;protected]</span></div></div>
+      </a>
+      <a class="clink" href="https://www.instagram.com/webs.moment/" target="_blank">
+        <div class="clink-icon">📸</div>
+        <div><div class="clink-lbl">Instagram</div><div class="clink-val">@webs.moment</div></div>
+      </a>
+      <a class="clink" href="#">
+        <div class="clink-icon">📍</div>
+        <div><div class="clink-lbl">Location</div><div class="clink-val">Delhi, India</div></div>
+      </a>
+    </div>
+    <div class="form-card reveal">
+      <div class="form-card-title">Send a Message 🚀</div>
+      <div class="form-card-sub">We'll reply within a few hours!</div>
+      <div id="theForm">
+        <div class="fg"><label>Your Name</label><input type="text" id="fn" placeholder="e.g. Rahul Sharma"></div>
+        <div class="fg"><label>Your Business</label><input type="text" id="fb" placeholder="e.g. My Clothing Brand"></div>
+        <div class="fg"><label>Service Needed</label>
+          <select id="fs">
+            <option value="">— Pick a service 👇 —</option>
+            <option>High-Converting Landing Page</option>
+            <option>Hero Section & CTA Copywriting</option>
+            <option>Sales-Optimized Theme</option>
+            <option>Google Sheets Form System</option>
+            <option>Paid Ads Management</option>
+            <option>Interactive Business Website</option>
+            <option>Full Package / Not Sure Yet</option>
+          </select>
+        </div>
+        <div class="fg"><label>Your Message</label><textarea id="fm" placeholder="Tell us about your project! 🎯"></textarea></div>
+        <button class="fbtn" onclick="doSubmit()">Send via WhatsApp 💬</button>
+      </div>
+      <div class="fsuccess" id="fok">
+        🎉 Opening WhatsApp!
+        <span>We'll reply shortly — get ready to grow! 🚀</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="flogo">Moment<span>maze</span> 🎯</div>
+  <div class="fcopy">© 2025 Momentmaze · Delhi, India<br>hello@momentmaze.in</div>
+</footer>
+
+<script>
+const els=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*80);io.unobserve(e.target);}
+  });
+},{threshold:.08});
+els.forEach(el=>io.observe(el));
+
+const SHEET_URL='https://script.google.com/macros/s/AKfycbzu-D10rGwThdZNJ7kz3BQFCuivBw4wsQccMVX1jd3bYO5mVS70PNE6Ffah6ABDVH2o0w/exec';
+
+function doSubmit(){
+  const n=document.getElementById('fn').value.trim();
+  const b=document.getElementById('fb').value.trim();
+  const s=document.getElementById('fs').value;
+  const m=document.getElementById('fm').value.trim();
+  if(!n||!s){alert('Please enter your name and pick a service!');return;}
+
+  const btn=document.querySelector('.fbtn');
+  btn.textContent='Sending... ⏳';
+  btn.disabled=true;
+
+  const params=new URLSearchParams({
+    name:n,
+    business:b||'—',
+    service:s,
+    message:m||'—',
+    timestamp:new Date().toLocaleString('en-IN',{timeZone:'Asia/Kolkata'})
+  });
+
+  fetch(SHEET_URL,{
+    method:'POST',
+    mode:'no-cors',
+    headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body:params.toString()
+  }).finally(()=>{
+    document.getElementById('theForm').style.display='none';
+    document.getElementById('fok').style.display='block';
+    const msg=`Hi Momentmaze! 👋\n\nName: ${n}\nBusiness: ${b||'—'}\nService: ${s}\nMessage: ${m||'—'}`;
+    setTimeout(()=>{window.open('https://wa.me/919217147794?text='+encodeURIComponent(msg),'_blank');},800);
+  });
+}
+</script>
+</body>
+</html>
